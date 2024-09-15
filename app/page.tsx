@@ -5,7 +5,7 @@ import Navbar from "@/components/navbar/Navbar";
 import {useRouter} from "next/navigation";
 import FoodCart from '@/components/food-cart/FoodCart'
 import OrderCart from '@/components/order-cart/OrderCart'
-import {useEffect, useState, useMemo} from "react";
+import {useEffect, useState, useMemo, useCallback, memo} from "react";
 import Confirm from "@/components/confirm-box/Confirm";
 import Accepted from "@/components/status/Accepted";
 import Cooking from "@/components/status/Cooking";
@@ -51,7 +51,7 @@ export default function Home() {
       .catch(err => console.log('Error: '+err));
   }, []);
 
-  
+
 
   // Memoized Order List
   const memoOrderList=useMemo(() => (
@@ -122,32 +122,35 @@ export default function Home() {
       <div className="flex flex-wrap justify-center content-start relative z-10 w-[424px] min-h-[750px] top-[92px] 2xl:left-[66px] xl:left-[66px] lg:left-[33px] 2xl:mt-0 xl:mt-0 lg:mt-0 md:mt-4 sm:mt-4">
 
         {
+
           orderList?.length>0? (
 
             !shoppingCartConfirm? (
-              <div className="relative flex justify-center items-start w-full h-[572px] rounded-[10px] border-[0.2px] border-[#00000040] bg-white">
-                <p className="absolute top-[25px] text-[20px] font-semibold">لـیـست سـفـارشـات</p>
-                <div className="flex flex-col items-center justify-start absolute bottom-0 w-full h-[480px] gap-2">
-                  <div className="relative w-full h-[288px]">
-                    <div className="overflow-auto w-full h-[216px]">
-                      {memoOrderList}
-                    </div>
-                    <div className="flex flex-row-reverse justify-between items-center absolute w-full h-[72px] bottom-0 border-[#00000040] border-y-[0.2px] ">
-                      <p className="mr-7 w-[80px] h-6 text-[20px] text-center font-medium">هزینه کل</p>
-                      <div className="flex flex-row-reverse justify-center w-[100px] h-[30px] gap-[1px] ml-7">
-                        <span className="text-[20px] font-bold text-center leading-[30px]">
-                          {totalPrice}
-                        </span>
-                        <span className="text-[16px] font-medium select-none text-center leading-[30px]">تومان</span>
+              useMemo(() => {
+                return (<div className="relative flex justify-center items-start w-full h-[572px] rounded-[10px] border-[0.2px] border-[#00000040] bg-white">
+                  <p className="absolute top-[25px] text-[20px] font-semibold">لـیـست سـفـارشـات</p>
+                  <div className="flex flex-col items-center justify-start absolute bottom-0 w-full h-[480px] gap-2">
+                    <div className="relative w-full h-[288px]">
+                      <div className="overflow-auto w-full h-[216px]">
+                        {memoOrderList}
+                      </div>
+                      <div className="flex flex-row-reverse justify-between items-center absolute w-full h-[72px] bottom-0 border-[#00000040] border-y-[0.2px] ">
+                        <p className="mr-7 w-[80px] h-6 text-[20px] text-center font-medium">هزینه کل</p>
+                        <div className="flex flex-row-reverse justify-center w-[100px] h-[30px] gap-[1px] ml-7">
+                          <span className="text-[20px] font-bold text-center leading-[30px]">
+                            {totalPrice}
+                          </span>
+                          <span className="text-[16px] font-medium select-none text-center leading-[30px]">تومان</span>
+                        </div>
                       </div>
                     </div>
+
+                    <textarea placeholder="توضیحات سفارش..." value={comment} onChange={e => setComment(e.target.value)} className="w-[404px] h-[100px] leading-[25px] border-[0.2px] border-[#79747E] px-3 pb-[60px] pt-4 rounded-[8px] text-right placeholder:text-[#49454F] focus:outline-none text-wrap overflow-hidden" style={{direction: 'rtl', resize: 'none'}} />
+
+                    <button className="w-[404px] h-[60px] bg-[#F6510B] text-white rounded-[5px] gap-[10px] font-medium text-[20px]  text-center leading-[60px]" onClick={() => setShoppingCartConfirm(true)}>ثــبــت سـفـارش</button>
                   </div>
-
-                  <textarea placeholder="توضیحات سفارش..." value={comment} onChange={e => setComment(e.target.value)} className="w-[404px] h-[100px] leading-[25px] border-[0.2px] border-[#79747E] px-3 pb-[60px] pt-4 rounded-[8px] text-right placeholder:text-[#49454F] focus:outline-none text-wrap overflow-hidden" style={{direction: 'rtl', resize: 'none'}} />
-
-                  <button className="w-[404px] h-[60px] bg-[#F6510B] text-white rounded-[5px] gap-[10px] font-medium text-[20px]  text-center leading-[60px]" onClick={() => setShoppingCartConfirm(true)}>ثــبــت سـفـارش</button>
-                </div>
-              </div>
+                </div>)
+              }, [memoOrderList,totalPrice,comment])
             ):(
               <>
 
@@ -155,7 +158,7 @@ export default function Home() {
                   <Accepted list={orderList} />
                 ):status==='Cooking'? (
                   <Cooking list={orderList} />
-                ):status==='Ready'?(
+                ):status==='Ready'? (
                   <Ready list={orderList} />
                 ):null}
 
@@ -250,13 +253,14 @@ export default function Home() {
 
     </>
   );
+
 }
 
 // Get Total Price Component
-const GetTotalPrice = (list:any) => {
-    const price=list.reduce((sum: number, item: any) => {
-      return sum+item.price*item.number;
-    }, 0);
+const GetTotalPrice=(list: any) => {
+  const price=list.reduce((sum: number, item: any) => {
+    return sum+item.price*item.number;
+  }, 0);
 
   return price
 }

@@ -1,197 +1,167 @@
-'use client'
+"use client";
 
-import {useState, useEffect} from "react"
-import Image from "next/image"
-import {Backdrop, CircularProgress, Button, Modal, Box, Typography, Tooltip} from "@mui/material"
-import {useRouter} from "next/navigation"
+import {
+  useState,
+  useMemo
+} from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import ErrorBox from "@/components/ErrorBox/ErrorBox";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 export default function Login() {
-  // First Phase
-  const [phone, setPhone]=useState<string>('')
-  const [isPhoneValid, setIsPhoneValid]=useState<boolean>(false)
-  const phoneRegex=/^(\+98|0)?9\d{9}$/
+  const [phoneInput, setPhoneInput] = useState<string>("");
+  const [isPhoneValid, setIsPhoneValid] = useState<boolean>(false);
+  const [codeInput, setCodeInput] = useState<string>("");
+  const [generatedCode, setGeneratedCode] = useState<number | null>(null);
+  const [showTimer, setShowTimer] = useState<number>(0); // ==> second
+  const [isShowErrorBox, setIsShowErrorBox] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState(""); // errorMsg for ErrorBox
+  const [isShowProgress, setIsShowProgress] = useState<boolean>(false);
+  const phoneRegex = /^(\+98|0)?9\d{9}$/;
+  const router = useRouter();
 
-  // Second Phase
-  const [code, setCode]=useState<string>('')
-  const [generatedCode, setGeneratedCode]=useState<number|null>(null)
-  const [isLogin, setIsLogin]=useState<boolean>(false)
+  const onInputChange = (e: { target: { value: string } }) => {
+    !isPhoneValid
+      ? setPhoneInput(e.target.value)
+      : setCodeInput(e.target.value);
+  };
 
-  // Timer for login
-  const [timeLeft, setTimeLeft]=useState<number>(20) // 20s
-
-  // Other Settings
-  const [isBackdropOpen, setIsBackdropOpen]=useState(false)
-
-  const [isModalOpen, setIsModalOpen]=useState(false);
-  const modalHandleOpen=() => setIsModalOpen(true);
-  const modalHandleClose=() => setIsModalOpen(false);
-
-  const router=useRouter()
-
-  useEffect(() => {
-    if (isPhoneValid&&timeLeft>0&&!isModalOpen) {
-      const timer=setInterval(() => {
-        setTimeLeft((prev) => prev-1)
-      }, 1000)
-      return () => clearInterval(timer)
-    } else if (timeLeft===0) {
-      setGeneratedCode(null)
+  const generateCode = () => {
+    let code = Math.floor(Math.random() * 100000);
+    while (code < 10000) {
+      code = Math.floor(Math.random() * 100000);
     }
-  }, [timeLeft, isPhoneValid, isModalOpen])
 
-  const phoneInputHandler=(e: any) => {
-    if (e.key==='Enter') {
-      phoneValidation()
-      e.target.value=''
+    setIsShowProgress(true);
+    setTimeout(() => {
+      setIsShowProgress(false);
+      setGeneratedCode(code);
+      setErrorMsg(`کد فعالسازی: ${code}`);
+      setIsShowErrorBox(true);
+      setShowTimer(20);
+    }, 3000);
+  };
+
+  useMemo(() => {
+    let timer = showTimer;
+    const intervalTimer = setInterval(() => {
+      timer > 0 && (timer--, setShowTimer(timer));
+      timer === 0 &&
+        (setGeneratedCode(null), setShowTimer(0), clearInterval(intervalTimer));
+    }, 1000);
+  }, [showTimer]);
+
+  const dataValidation = () => {
+    if (!isPhoneValid) {
+      if (phoneRegex.test(phoneInput)) {
+        setIsPhoneValid(true);
+        generateCode();
+      } else {
+        setPhoneInput("");
+        setIsShowErrorBox(true);
+        setErrorMsg("شماره تلفن وارد شده نامعتبر می باشد!");
+      }
+    } else {
+      if (generatedCode !== null && +codeInput === generatedCode) {
+        router.push("/");
+        localStorage.setItem("isLoggedIn", "true");
+      } else {
+        setIsShowErrorBox(true);
+        setErrorMsg("کد وارد شده نامعتبر می باشد!");
+        setCodeInput("");
+      }
     }
-  }
+  };
 
-  const phoneValidation=() => {
-    let i=0
-    if (phoneRegex.test(phone)) {
-      setIsBackdropOpen(true)
-      new Promise(res => {
-        setInterval(() => {
-          i===2? (
-            setIsBackdropOpen(false),
-            res(null)
-          )
-            :null
-          i++
-        }, 1000)
-      }).then(() => {
-        setIsPhoneValid(true)
-        generateCode()
-      })
-    }
-  }
-
-  const codeInputHandler=(e: any) => {
-    if (e.key==='Enter') {
-      validateCode()
-      e.target.value=''
-    }
-  }
-
-  const generateCode=() => {
-    const newCode=Math.floor(10000+Math.random()*90000)
-    setGeneratedCode(newCode)
-    setTimeLeft(20)
-    modalHandleOpen()
-  }
-
-  const validateCode=() => {
-    if (+code===generatedCode) {
-      localStorage.setItem('isLoggedIn', 'true')
-      setIsLogin(true)
-    }
-  }
-
-  if (isLogin||localStorage.getItem('isLoggedIn')) {
-    router.push('/')
-  }
+  // redirect to home if you have logged in
+  // localStorage.getItem("isLoggedIn") === "true" && router.push("/");
 
   return (
-    <div className="relative z-50 bg-white w-full h-full">
-      <Backdrop
-        sx={{
-          color: '#fff',
-          outline: 'none',
-          zIndex: 100,
-          position: 'fixed',
-        }}
-        open={isBackdropOpen}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-      <Modal
-        open={isModalOpen}
-        onClose={modalHandleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '20%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '90%',
-            maxWidth: '350px',
-            bgcolor: 'background.paper',
-            boxShadow: 24,
-            outline: 'none',
-            p: 4,
-            zIndex: 110,
-          }}
-        >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            <p className="font-Vazir text-right">
-              !پیام
-            </p>
-          </Typography>
-          <Typography id="modal-modal-description" sx={{mt: 2, direction: 'rtl'}}>
-            <span className="font-Vazir text-right ml-[2px] h-3 leading-3">
-              کد شما جهت ورود:
-            </span>
-            <Tooltip title="برای کپی کلیک کنید" arrow><span className="cursor-pointer font-Vazir h-3 leading-3" onClick={() => {navigator.clipboard.writeText(`${generatedCode}`), modalHandleClose()}}>{generatedCode}</span></Tooltip>
-          </Typography>
-        </Box>
-      </Modal>
-
-      <div className="flex flex-col justify-between items-center w-[117px] h-[164px] absolute top-[150px] sm:top-[220px]" style={{left: '50%', transform: 'translateX(-50%)'}}>
-        <Image onDragStart={(e) => e.preventDefault()} className="select-none" src={'images/icon.svg'} width={117} height={117} alt="logo" />
-        <div className="flex justify-between w-[117px] h-[36px]">
-          <span className="w-[44px] h-[36px] font-medium text-lg text-center text-black select-none font-Vazir">BEH</span>
-          <span className="w-[69px] h-[36px] font-extrabold text-lg text-center text-[#F6510B] select-none font-Vazir">FOOD</span>
-        </div>
-      </div>
-
-      {isPhoneValid? (
-        <>
-          <input
-            placeholder={`کد فعالسازی`}
-            className="absolute block w-[90%] max-w-[280px] h-[47px] rounded-[8px] px-4 py-3 border-[0.5px] top-[350px] sm:top-[433px] text-right text-black font-Vazir text-sm"
-            style={{left: '50%', transform: 'translateX(-50%)'}}
-            type="number"
-            onChange={(e) => setCode(e.target.value)}
-            onKeyUp={codeInputHandler}
-            value={code}
+    <div className="relative bg-white w-full min-h-screen">
+      {useMemo(() => {
+        return (
+          <ErrorBox
+            open={isShowErrorBox}
+            setOpen={setIsShowErrorBox}
+            msg={errorMsg}
           />
-          <button
-            className="block w-[90%] max-w-[280px] h-[47px] rounded-[8px] px-4 py-[10px] text-white bg-[#F6510B] absolute top-[400px] sm:top-[497px] font-Vazir text-sm"
-            style={{left: '50%', transform: 'translateX(-50%)'}}
-            onClick={validateCode}
+        );
+      }, [isShowErrorBox, errorMsg])}
+
+      {useMemo(() => {
+        return (
+          isShowProgress && (
+            <Backdrop
+              sx={{ zIndex: 999 }}
+              open={isShowProgress}
+              onClick={() => setIsShowProgress(false)}
+            >
+              <CircularProgress sx={{ color: "#F6510B" }} />
+            </Backdrop>
+          )
+        );
+      }, [isShowProgress])}
+
+      {useMemo(() => {
+        return (
+          <div
+            className="relative flex flex-col items-center justify-start w-[280px] h-[326px]"
+            style={{ left: "calc(50vw - 140px)", top: "calc(50vh - 163px)" }}
           >
-            ورود
-          </button>
-          <button
-            className={`w-[280px] h-5 text-[#1C1B1F] fixed opacity-[38%] bottom-5 font-Vazir text-sm font-bold ${timeLeft===0? 'hover:underline':'cursor-auto'}`}
-            onClick={generateCode}
-            style={{marginLeft: 'calc(50% - 140px)'}}
-          >
-            {`ارسال مجدد کد فعالسازی (${Math.floor(timeLeft/60).toString().padStart(2, '0')}:${(timeLeft%60).toString().padStart(2, '0')})`}
-          </button>
-        </>
-      ):(
-        <>
-          <input
-            placeholder={`شماره تلفن همراه`}
-            className="block w-[90%] max-w-[280px] h-[47px] rounded-[8px] px-4 py-3 border-[0.5px] absolute top-[350px] sm:top-[433px] text-right text-black font-Vazir text-sm"
-            style={{left: '50%', transform: 'translateX(-50%)'}}
-            type="text"
-            onChange={(e) => setPhone(e.target.value)}
-            onKeyUp={phoneInputHandler}
-          />
-          <button
-            className="block w-[90%] max-w-[280px] h-[47px] rounded-[8px] px-4 py-[10px] text-white bg-[#F6510B] absolute top-[400px] sm:top-[497px] font-Vazir text-sm"
-            style={{left: '50%', transform: 'translateX(-50%)'}}
-            onClick={phoneValidation}
-          >
-            دریافت کد فعالسازی
-          </button>
-        </>
-      )}
+            <div className="w-[117px] h-[164px] flex flex-col justify-between items-center">
+              <img
+                src="images/icon.svg"
+                alt="logo"
+                className="w-full h-[117px]"
+                onDragStart={(e) => e.preventDefault()}
+              />
+              <div className="w-full h-[36px] flex justify-center items-center select-none">
+                <span className="mr-[2px] text-[24px] font-vazir-400">BEH</span>
+                <span className="text-primary ml-[2px] text-[24px] font-vazir-700">
+                  FOOD
+                </span>
+              </div>
+            </div>
+
+            <input
+              type={!isPhoneValid ? "text" : "number"}
+              placeholder={!isPhoneValid ? `شماره تلفن همراه` : "کد فعالسازی"}
+              className=" placeholder:text-[#49454F] border-[0.2px] outline-[#79747E] py-4 px-3 rounded-[8px] font-medium text-[16px] w-[280px] h-[58px] mt-[49px] font-vazir-600"
+              value={!isPhoneValid ? phoneInput : codeInput}
+              onChange={(e) => onInputChange(e)}
+              style={{ direction: "ltr", textAlign: "right" }}
+              onKeyUp={(e) => e.keyCode === 13 && dataValidation()}
+            />
+            <button
+              className=" w-[280px] h-[47px] py-[10px] px-4 bg-primary text-center text-white rounded-[8px] mt-2 text-[14px] font-vazir-700 select-none"
+              onClick={dataValidation}
+            >
+              {!isPhoneValid ? "دریافت کدفعالسازی" : "ورود"}
+            </button>
+          </div>
+        );
+      }, [isPhoneValid, phoneInput, codeInput])}
+
+      {useMemo(() => {
+        return (
+          isPhoneValid && (
+            <button
+              className={`absolute w-[280px] h-[47px] text-[#1C1B1F] top-[90%] font-vazir-700 opacity-[38%] text-[14px] select-none ${
+                showTimer ? "hover:cursor-auto" : "hover:underline"
+              }`}
+              style={{ direction: "rtl", left: "calc(50vw - 140px)" }}
+              onClick={(e) => showTimer === 0 && generateCode()}
+            >
+              ارسال مجدد کد فعالسازی (
+              {Math.floor(showTimer / 60)
+                .toString()
+                .padStart(2, "0")}
+              :{(showTimer % 60).toString().padStart(2, "0")})
+            </button>
+          )
+        );
+      }, [showTimer, isPhoneValid])}
     </div>
-  )
+  );
 }
