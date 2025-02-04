@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Box, Typography, Modal} from '@mui/material'
 
-export default function Confirm() {
+export default function ConfirmBox() {
 
   const [modalOpen,setModalOpen] = useState(true)
   

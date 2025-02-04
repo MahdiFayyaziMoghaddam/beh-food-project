@@ -6,10 +6,11 @@ import {
 } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import ErrorBox from "@/components/ErrorBox/ErrorBox";
+import ErrorModal from "@/components/Modal/ErrorModal";
 import { Backdrop, CircularProgress } from "@mui/material";
 
 export default function Login() {
+  // Hooks
   const [phoneInput, setPhoneInput] = useState<string>("");
   const [isPhoneValid, setIsPhoneValid] = useState<boolean>(false);
   const [codeInput, setCodeInput] = useState<string>("");
@@ -21,12 +22,14 @@ export default function Login() {
   const phoneRegex = /^(\+98|0)?9\d{9}$/;
   const router = useRouter();
 
+  // Set inputs value in state
   const onInputChange = (e: { target: { value: string } }) => {
     !isPhoneValid
       ? setPhoneInput(e.target.value)
       : setCodeInput(e.target.value);
   };
 
+  // Generate code with 5 length
   const generateCode = () => {
     let code = Math.floor(Math.random() * 100000);
     while (code < 10000) {
@@ -39,10 +42,11 @@ export default function Login() {
       setGeneratedCode(code);
       setErrorMsg(`کد فعالسازی: ${code}`);
       setIsShowErrorBox(true);
-      setShowTimer(20);
+      setShowTimer(120);
     }, 3000);
   };
 
+  // Code timeout timer
   useMemo(() => {
     let timer = showTimer;
     const intervalTimer = setInterval(() => {
@@ -52,6 +56,7 @@ export default function Login() {
     }, 1000);
   }, [showTimer]);
 
+  // Validation data from inputs
   const dataValidation = () => {
     if (!isPhoneValid) {
       if (phoneRegex.test(phoneInput)) {
@@ -74,14 +79,14 @@ export default function Login() {
     }
   };
 
-  // redirect to home if you have logged in
-  // localStorage.getItem("isLoggedIn") === "true" && router.push("/");
+  // Redirect to home if you have logged in
+  localStorage.getItem("isLoggedIn") === "true" && router.push("/");
 
   return (
     <div className="relative bg-white w-full min-h-screen">
       {useMemo(() => {
         return (
-          <ErrorBox
+          <ErrorModal
             open={isShowErrorBox}
             setOpen={setIsShowErrorBox}
             msg={errorMsg}
@@ -109,14 +114,15 @@ export default function Login() {
             className="relative flex flex-col items-center justify-start w-[280px] h-[326px]"
             style={{ left: "calc(50vw - 140px)", top: "calc(50vh - 163px)" }}
           >
-            <div className="w-[117px] h-[164px] flex flex-col justify-between items-center">
-              <img
+            <div className="w-[117px] h-[164px] flex flex-col justify-between items-center select-none">
+              <Image
                 src="images/icon.svg"
+                width={117}
+                height={117}
                 alt="logo"
-                className="w-full h-[117px]"
                 onDragStart={(e) => e.preventDefault()}
               />
-              <div className="w-full h-[36px] flex justify-center items-center select-none">
+              <div className="w-full h-[36px] flex justify-center items-center">
                 <span className="mr-[2px] text-[24px] font-vazir-400">BEH</span>
                 <span className="text-primary ml-[2px] text-[24px] font-vazir-700">
                   FOOD

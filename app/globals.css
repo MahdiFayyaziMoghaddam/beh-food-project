@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@600&display=swap');
@@ -10,7 +10,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100&display=swap'); */
 
 * {
   box-sizing: border-box;
@@ -39,13 +39,21 @@
 
 @layer base {
   @font-face {
-    font-family: "Vazirmatn Black";
+    font-family: "Vazirmatn Black Ar";
     src: url(https://fonts.gstatic.com/s/vazirmatn/v13/Dxx78j6PP2D_kU2muijPEe1n2vVbfJRklcE0CRWT7lDF.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: "Vazirmatn Black En";
+    src: url(https://fonts.gstatic.com/s/vazirmatn/v13/Dxx78j6PP2D_kU2muijPEe1n2vVbfJRklcE0CRCT7g.woff2) format('woff2');
   }
 
   @font-face {
-    font-family: "Vazirmatn ExtraBold";
+    font-family: "Vazirmatn ExtraBold Ar";
     src: url(https://fonts.gstatic.com/s/vazirmatn/v13/Dxx78j6PP2D_kU2muijPEe1n2vVbfJRkleg0CRWT7lDF.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: "Vazirmatn ExtraBold En";
+    src: url(https://fonts.gstatic.com/s/vazirmatn/v13/Dxx78j6PP2D_kU2muijPEe1n2vVbfJRkleg0CRCT7g.woff2) format('woff2');
   }
 
   @font-face {
@@ -55,11 +63,6 @@
   @font-face {
     font-family: "Vazirmatn Bold Ar";
     src: url(https://fonts.gstatic.com/s/vazirmatn/v13/Dxx78j6PP2D_kU2muijPEe1n2vVbfJRklY80CRWT7lDF.woff2) format('woff2');
-  }
-
-  @font-face {
-    font-family: "Vazirmatn ExtraBold";
-    src: url(https://fonts.gstatic.com/s/vazirmatn/v13/Dxx78j6PP2D_kU2muijPEe1n2vVbfJRklbY0CRWT7lDF.woff2) format('woff2');
   }
   @font-face {
     font-family: "Vazirmatn SemiBold Ar";
@@ -94,12 +97,20 @@
     src: url(https://fonts.gstatic.com/s/vazirmatn/v13/Dxx78j6PP2D_kU2muijPEe1n2vVbfJRklTYzCRCT7g.woff2) format('woff2');
   }
   @font-face {
-    font-family: "Vazirmatn ExtraLight";
+    font-family: "Vazirmatn ExtraLight Ar";
     src: url(https://fonts.gstatic.com/s/vazirmatn/v13/Dxx78j6PP2D_kU2muijPEe1n2vVbfJRklegzCRWT7lDF.woff2) format('woff2');
   }
   @font-face {
-    font-family: "Vazirmatn Thin";
+    font-family: "Vazirmatn ExtraLight En";
+    src: url(https://fonts.gstatic.com/s/vazirmatn/v13/Dxx78j6PP2D_kU2muijPEe1n2vVbfJRklegzCRCT7g.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: "Vazirmatn Thin Ar";
     src: url(https://fonts.gstatic.com/s/vazirmatn/v13/Dxx78j6PP2D_kU2muijPEe1n2vVbfJRklWgyCRWT7lDF.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: "Vazirmatn Thin En";
+    src: url(https://fonts.gstatic.com/s/vazirmatn/v13/Dxx78j6PP2D_kU2muijPEe1n2vVbfJRklWgyCRCT7g.woff2) format('woff2');
   }
 
 }

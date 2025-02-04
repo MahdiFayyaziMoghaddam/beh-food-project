@@ -6,16 +6,16 @@
     "price": 17000,
     "prevPrice": 45000,
     "image": "pizza.svg",
-    "type": "lunch"
+    "category": "lunch"
   },
   {
     "id": 2,
     "name": "ساندویچ مرغ",
-    "title": "نان ساندویچ، مرغ، خیار شور، ریحان، کاچاپ، مایونز",
+    "title": "نان ساندویچ، مرغ، خیار شور، ریحان، کچاپ، مایونز",
     "price": 12000,
     "prevPrice": 0,
     "image": "pizza.svg",
-    "type": "lunch"
+    "category": "lunch"
   },
   {
     "id": 3,
@@ -24,7 +24,7 @@
     "price": 8000,
     "prevPrice": 15000,
     "image": "pizza.svg",
-    "type": "breakfast"
+    "category": "breakfast"
   },
   {
     "id": 4,
@@ -33,7 +33,7 @@
     "price": 25000,
     "prevPrice": 35000,
     "image": "pizza.svg",
-    "type": "lunch"
+    "category": "lunch"
   },
   {
     "id": 5,
@@ -42,7 +42,7 @@
     "price": 7000,
     "prevPrice": 12000,
     "image": "pizza.svg",
-    "type": "breakfast"
+    "category": "breakfast"
   },
   {
     "id": 6,
@@ -51,7 +51,7 @@
     "price": 10000,
     "prevPrice": 18000,
     "image": "pizza.svg",
-    "type": "breakfast"
+    "category": "breakfast"
   },
   {
     "id": 7,
@@ -60,7 +60,7 @@
     "price": 15000,
     "prevPrice": 25000,
     "image": "pizza.svg",
-    "type": "lunch"
+    "category": "lunch"
   },
   {
     "id": 8,
@@ -69,7 +69,7 @@
     "price": 9000,
     "prevPrice": 0,
     "image": "pizza.svg",
-    "type": "breakfast"
+    "category": "breakfast"
   },
   {
     "id": 9,
@@ -78,7 +78,7 @@
     "price": 20000,
     "prevPrice": 30000,
     "image": "pizza.svg",
-    "type": "lunch"
+    "category": "lunch"
   },
   {
     "id": 10,
@@ -87,6 +87,6 @@
     "price": 5000,
     "prevPrice": 0,
     "image": "pizza.svg",
-    "type": "breakfast"
+    "category": "breakfast"
   }
 ]

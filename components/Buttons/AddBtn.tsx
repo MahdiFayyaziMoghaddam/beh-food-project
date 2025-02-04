@@ -1,7 +1,7 @@
 'use client'
-import {useState} from "react"
+import {useContext, useState} from "react"
 
-export default function AddCart({classNameProp,size,onClickProp, closeAfterClick}: any) {
+export default function AddBtn({classNameProp,size,onClickProp, closeAfterClick}: any) {
 
   const [onHover, setOnHover] = useState(false)
 

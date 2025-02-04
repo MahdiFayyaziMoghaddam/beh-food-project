@@ -4,6 +4,11 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const metadata: Metadata = {
+  title: 'BEH FOOD',
+  description: 'From BEH FOOD'
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -12,10 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-      <title>BEH FOOD</title>
       <link rel="shortcut icon" href="images/icon.svg" type="image/x-icon" />
       </head>
-      <body className={`${inter.className} min-h-screen bg-[#FAFAFA]`}>{children}</body>
+      <body className={`${inter.className} min-h-screen`}>{children}</body>
     </html>
   );
 }

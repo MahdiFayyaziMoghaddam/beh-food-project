@@ -8,21 +8,31 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
 
+    screens: {
+      "1440x": '1440px',
+      "1280x": '1280px',
+      "1024x": '1024px',
+      "860x": '860px',
+      "640x": '640px',
+      "480x": '480px',
+      "320x": '320px',
+    },
+
+    extend: {
       colors: {
         primary: "#F6510B"
       },
       fontFamily: {
-        "vazir-900": "Vazirmatn Black",
-        "vazir-800": "Vazirmatn ExtraBold",
-        "vazir-700": ["Vazirmatn Bold En", "Vazirmatn Bold Ar"],
+        "vazir-900": ["Vazirmatn Black Ar","Vazirmatn Black En"],
+        "vazir-800": ["Vazirmatn ExtraBold Ar","Vazirmatn ExtraBold En"],
+        "vazir-700": ["Vazirmatn Bold Ar", "Vazirmatn Bold En"],
         "vazir-600": ["Vazirmatn SemiBold Ar", "Vazirmatn SemiBold En"],
-        "vazir-500": ["Vazirmatn Medium En", "Vazirmatn Medium Ar"],
-        "vazir-400": ["Vazirmatn Regular En","Vazirmatn Regular Ar"],
+        "vazir-500": ["Vazirmatn Medium Ar", "Vazirmatn Medium En"],
+        "vazir-400": ["Vazirmatn Regular Ar","Vazirmatn Regular En"],
         "vazir-300": ["Vazirmatn Light Ar", "Vazirmatn Light En"],
-        "vazir-200": "Vazirmatn ExtraLight",
-        "vazir-100": "Vazirmatn Thin",
+        "vazir-200": ["Vazirmatn ExtraLight Ar","Vazirmatn ExtraLight En"],
+        "vazir-100": ["Vazirmatn Thin Ar","Vazirmatn Thin En"]
       }
     }
   },

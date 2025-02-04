@@ -2,7 +2,7 @@
 
 import { Modal, Box, Typography } from "@mui/material";
 
-export default function ErrorBox({ open, setOpen, msg }: any) {
+export default function ErrorModal({ open, setOpen, msg }: any) {
   return (
     <Modal
       open={open}
