@@ -1,13 +1,30 @@
-import React, { createContext, useEffect, useState, useContext } from 'react'
+import React, { createContext, useState, useContext } from 'react'
 
-const OrderContext = createContext<any>([])
+interface IOrderItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
 
-export const OrderListProvider = ({ children }:any) => {
-  const [orderList, setOrderList] = useState([]);
+interface IOrderContextState {
+  orderList: IOrderItem[];
+  setOrderList: React.Dispatch<React.SetStateAction<IOrderItem[]>>;
+}
 
-  // useEffect(()=>{
-  //   setOrderList(orderList)
-  // },[orderList])
+const defaultContextValue: IOrderContextState = {
+  orderList: [],
+  setOrderList: () => null
+};
+
+const OrderContext = createContext<IOrderContextState>(defaultContextValue);
+
+interface IOrderListProvider {
+  children: React.ReactNode;
+}
+
+export const OrderListProvider = ({ children }: IOrderListProvider) => {
+  const [orderList, setOrderList] = useState<IOrderItem[]>([]);
 
   return (
     <OrderContext.Provider value={{orderList, setOrderList}}>
@@ -16,6 +33,10 @@ export const OrderListProvider = ({ children }:any) => {
   );
 };
 
-export const useOrder = () => {
-  return useContext(OrderContext);
+export const useOrderListContext = () => {
+  const context = useContext(OrderContext);
+  if (!context) {
+    throw new Error('useOrder must be used within an OrderListProvider');
+  }
+  return context;
 };
