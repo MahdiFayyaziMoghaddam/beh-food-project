@@ -1,11 +1,11 @@
-import { useOrder } from "@/contexts/OrderListContext";
+import { useOrderListContext } from "@/contexts/OrderListContext";
 import Image from "next/image";
 import React, { useEffect, useMemo, useState } from "react";
 
-export default function Status({orderList}:any) {
+export default function Status() {
 
-  const [phase, setPhase] = useState('accepted')
-  // const {orderList} = useOrder()
+  const [phase, setPhase] = useState<'accepted' | 'cooking' | 'ready'>('accepted')
+  const {orderList} = useOrderListContext()
 
   useEffect(()=>{
     new Promise(res => {

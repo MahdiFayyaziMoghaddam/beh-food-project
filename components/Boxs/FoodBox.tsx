@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import FoodCart from "../Carts/FoodCart";
-import { useOrder } from "@/contexts/OrderListContext";
+import { useOrderListContext } from "@/contexts/OrderListContext";
 import { useEffect, useId, useState } from "react";
 
 export default function FoodBox({orderList, setOrderList}:any) {

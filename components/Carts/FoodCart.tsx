@@ -10,7 +10,7 @@ import {
   useState,
 } from "react";
 import useSpreadNumber from "@/hooks/useSpreadNumber";
-import { useOrder } from "@/contexts/OrderListContext";
+import { useOrderListContext } from "@/contexts/OrderListContext";
 
 export default function FoodCart({props,orderList,setOrderList}: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
