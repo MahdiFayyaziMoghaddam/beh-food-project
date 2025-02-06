@@ -1,8 +1,9 @@
 export interface IFoodItem {
-  id: number;
+  id: number | string;
   name: string;
-  description: string;
+  order: string;
   price: number;
+  offerPrice: number;
   category: string;
-  imageUrl: string;
+  image: string;
 }

@@ -1,5 +1,5 @@
 import { IFoodItem } from "./foodItem";
 
-export interface IOrderItem extends IFoodItem {
+export type TOrderItem = {
   quantity: number;
-}
+} & IFoodItem
