@@ -1,35 +1,33 @@
 "use client";
 
-import { useOrder } from "@/contexts/OrderListContext";
-import React, { useEffect, useMemo, useState } from "react";
+import { useOrderListContext } from "@/contexts/OrderListContext";
+import React, { useState } from "react";
 import useSpreadNumber from "@/hooks/useSpreadNumber";
 import ChangeBtn from "../Buttons/ChangeBtn";
 import OrderCart from "../Carts/OrderCart";
+import Backdrop from "../Backdrop/Backdrop";
 
 export default function OrderBox({
-  setIsShowProgress,
   setIsSubmittedOrder,
   comment,
   setComment,
-  orderList,
-  setOrderList
 }: any) {
-  // const { orderList, setOrderList } = useOrder();
   const [totalPrice, setTotalPrice] = useState<number>(0);
-
-  const totalPriceHandler = () => {
+  const [isShowBackdrop, setIsShowBackdrop] = useState<boolean>(false);
+  const { orderList, setOrderList } = useOrderListContext();
+  const getTotalPrices = () => {
     let price = 0;
-    
+
     orderList?.forEach((item: any) => {
-      price += item.price * (item?.number);
+      price += item.price * item?.number;
     });
-    
-    console.log(orderList)
-    setTotalPrice(price);
-  }
+
+    return price;
+  };
 
   return (
     <>
+      {isShowBackdrop ? <Backdrop /> : null}
       {orderList?.length !== 0 && (
         <div className="flex flex-col flex-nowrap items-center justify-start w-full min-h-[572px] border-[0.2px] border-[#00000040] rounded-[10px] bg-white">
           <p className="font-vazir-600 text-[20px] w-[159px] mb-0 h-[30px] leading-[30px] mt-[25px] select-none text-center">
@@ -38,7 +36,13 @@ export default function OrderBox({
 
           <div className="w-full max-h-[216px] min-h-[216px] mt-[23px] overflow-auto">
             {orderList?.map((cart: any) => {
-              return <OrderCart key={cart.id} props={cart} totalPriceHandler={totalPriceHandler} orderList={orderList} setOrderList={setOrderList}/>;
+              return (
+                <OrderCart
+                  key={cart.id}
+                  props={cart}
+                  totalPriceHandler={setTotalPrice(getTotalPrices())}
+                />
+              );
             })}
           </div>
 
@@ -68,9 +72,9 @@ export default function OrderBox({
             className="bg-primary text-white text-[16px] font-vazir-700 mb-0 py-[18px] px-[126px] rounded-[5px] mt-4"
             style={{ width: "calc(100% - 24px)" }}
             onClick={() => {
-              setIsShowProgress(true);
+              setIsShowBackdrop(true);
               setTimeout(() => {
-                setIsShowProgress(false);
+                setIsShowBackdrop(false);
                 setIsSubmittedOrder(true);
               }, 3000);
             }}
