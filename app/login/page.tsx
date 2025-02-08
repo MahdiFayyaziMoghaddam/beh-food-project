@@ -1,24 +1,21 @@
 "use client";
 
-import {
-  useState,
-  useMemo
-} from "react";
-import Image from "next/image";
+import { useMemo, useReducer, Dispatch } from "react";
 import { useRouter } from "next/navigation";
 import ErrorModal from "@/components/Modal/ErrorModal";
 import { Backdrop, CircularProgress } from "@mui/material";
+import { initialLoginState, loginReducer } from "@/stores/loginStore";
+import { ILoginStates } from "@/types/loginStates";
+import { TLoginActions } from "@/types/loginActions";
+import Image from "@/components/Image/Image";
 
 export default function Login() {
   // Hooks
-  const [phoneInput, setPhoneInput] = useState<string>("");
-  const [isPhoneValid, setIsPhoneValid] = useState<boolean>(false);
-  const [codeInput, setCodeInput] = useState<string>("");
-  const [generatedCode, setGeneratedCode] = useState<number | null>(null);
-  const [showTimer, setShowTimer] = useState<number>(0); // ==> second
-  const [isShowErrorBox, setIsShowErrorBox] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState(""); // errorMsg for ErrorBox
-  const [isShowProgress, setIsShowProgress] = useState<boolean>(false);
+  const [state, dispatch]: [ILoginStates, Dispatch<TLoginActions>] = useReducer(
+    loginReducer,
+    initialLoginState
+  );
+
   const phoneRegex = /^(\+98|0)?9\d{9}$/;
   const router = useRouter();
 
@@ -30,15 +27,15 @@ export default function Login() {
   };
 
   // Generate code with 5 length
-  const generateCode = () => {
+  const generateCode = async() => {
     let code = Math.floor(Math.random() * 100000);
     while (code < 10000) {
       code = Math.floor(Math.random() * 100000);
     }
 
-    setIsShowProgress(true);
-    setTimeout(() => {
-      setIsShowProgress(false);
+    setIsShowBackdrop(true);
+   await setTimeout(() => {
+      setIsShowBackdrop(false);
       setGeneratedCode(code);
       setErrorMsg(`کد فعالسازی: ${code}`);
       setIsShowErrorBox(true);
@@ -80,7 +77,8 @@ export default function Login() {
   };
 
   // Redirect to home if you have logged in
-  localStorage.getItem("isLoggedIn") === "true" && router.push("/");
+  localStorage.getItem("beh-food-loggedIn-token") === "true" &&
+    router.push("/");
 
   return (
     <div className="relative bg-white w-full min-h-screen">
@@ -96,17 +94,17 @@ export default function Login() {
 
       {useMemo(() => {
         return (
-          isShowProgress && (
+          isShowBackdrop && (
             <Backdrop
               sx={{ zIndex: 999 }}
-              open={isShowProgress}
-              onClick={() => setIsShowProgress(false)}
+              open={isShowBackdrop}
+              onClick={() => setIsShowBackdrop(false)}
             >
               <CircularProgress sx={{ color: "#F6510B" }} />
             </Backdrop>
           )
         );
-      }, [isShowProgress])}
+      }, [isShowBackdrop])}
 
       {useMemo(() => {
         return (

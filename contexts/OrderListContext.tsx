@@ -1,15 +1,9 @@
+import { TOrderItem } from '@/types/orderItem';
 import React, { createContext, useState, useContext } from 'react'
 
-interface IOrderItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-}
-
 interface IOrderContextState {
-  orderList: IOrderItem[];
-  setOrderList: React.Dispatch<React.SetStateAction<IOrderItem[]>>;
+  orderList: TOrderItem[];
+  setOrderList: React.Dispatch<React.SetStateAction<TOrderItem[]>>;
 }
 
 const defaultContextValue: IOrderContextState = {
@@ -24,7 +18,7 @@ interface IOrderListProvider {
 }
 
 export const OrderListProvider = ({ children }: IOrderListProvider) => {
-  const [orderList, setOrderList] = useState<IOrderItem[]>([]);
+  const [orderList, setOrderList] = useState<TOrderItem[]>([]);
 
   return (
     <OrderContext.Provider value={{orderList, setOrderList}}>

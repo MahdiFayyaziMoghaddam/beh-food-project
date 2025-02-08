@@ -4,9 +4,9 @@
       "id": 1,
       "name": "پیتزا پپرونی",
       "order": "خمیر پیتزا، پنیر پیتزا، سوسیس پپرونی، گوجه فرنگی، فلفل دلمه‌ای، قارچ، نمک، فلفل، آویشن و جوز هندی",
-      "offerPrice": 17000,
-      "price": 45000,
-      "image": "pizza.svg",
+      "offerPrice": 20000,
+      "price": 35000,
+      "image": "https://assets.surlatable.com/m/15a89c2d9c6c1345/72_dpi_webp-REC-283110_Pizza.jpg",
       "category": "lunch"
     },
     {
@@ -15,7 +15,7 @@
       "order": "نان ساندویچ، مرغ، خیار شور، ریحان، کچاپ، مایونز",
       "offerPrice": 0,
       "price": 12000,
-      "image": "pizza.svg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjisocVFEWCftG89XKNrKz3RSSyFfc7aJIVw&s",
       "category": "lunch"
     },
     {
@@ -24,7 +24,7 @@
       "order": "تخم‌مرغ، قارچ، کره، نمک، فلفل سیاه",
       "offerPrice": 8000,
       "price": 15000,
-      "image": "pizza.svg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCMqrsEZuIvdiKBx7FUxpZp0wZyCU81_INpw&s",
       "category": "breakfast"
     },
     {
@@ -33,7 +33,7 @@
       "order": "گوشت گوساله، سس برگر، خیار شور، پنیر چدار، پیاز، گوجه فرنگی",
       "offerPrice": 25000,
       "price": 35000,
-      "image": "pizza.svg",
+      "image": "https://www.seriouseats.com/thmb/uSNXjlR9pQU0Nt9HJTzD2ZhZ45Y=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__images__2015__07__20150728-homemade-whopper-food-lab-35-b3500a5c2f3e4e10aa3169d5f76e1468.jpg",
       "category": "lunch"
     },
     {
@@ -42,7 +42,7 @@
       "order": "نان تست، عسل طبیعی، کره",
       "offerPrice": 7000,
       "price": 12000,
-      "image": "pizza.svg",
+      "image": "https://gimmerecipe.com/wp-content/uploads/2024/09/Honey-Butter-Toast-%E2%80%93-The-Sweet-Buttery-Breakfast-Treat-Youll-Love.webp",
       "category": "breakfast"
     },
     {
@@ -51,7 +51,7 @@
       "order": "آرد، تخم‌مرغ، شیر، شکر، وانیل، عسل",
       "offerPrice": 10000,
       "price": 18000,
-      "image": "pizza.svg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFcGOfa4R2Qy7ezxDwc1geT29WF_0DvY8lVQ&s",
       "category": "breakfast"
     },
     {
@@ -60,7 +60,7 @@
       "order": "مرغ، کاهو، گوجه، خیار، روغن زیتون",
       "offerPrice": 15000,
       "price": 25000,
-      "image": "pizza.svg",
+      "image": "https://olo-images-live.imgix.net/cb/cbe0798e0b9e4bbbb7391c96da4d9010.jpg?auto=format%2Ccompress&q=60&cs=tinysrgb&w=1725&h=975&fit=fill&fm=png32&bg=transparent&s=3257b39b8997e1b9220b4309691158b8",
       "category": "lunch"
     },
     {
@@ -69,7 +69,7 @@
       "order": "نان تست، تخم‌مرغ، شیر، شکر، وانیل، کره",
       "offerPrice": 0,
       "price": 9000,
-      "image": "pizza.svg",
+      "image": "https://www.allrecipes.com/thmb/kpI2DQrw7zDake_7B8wOJRkZ-6Y=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ALR-recipe-16895-fluffy-french-toast-hero-01-ddmfs-4x3-7fd61e054f2c4f0f868b7ab0dd8767ae.jpg",
       "category": "breakfast"
     },
     {
@@ -78,7 +78,7 @@
       "order": "ماکارونی، خامه، سیر، پنیر پارمزان، مرغ",
       "offerPrice": 20000,
       "price": 30000,
-      "image": "pizza.svg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5EuVYEm22v_-iy2vFQ-4niAT7Dk4uzs_CYA&s",
       "category": "lunch"
     },
     {
@@ -87,7 +87,7 @@
       "order": "تخم‌مرغ، نمک، فلفل",
       "offerPrice": 0,
       "price": 5000,
-      "image": "pizza.svg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB9dmvz7UM6BhWUDuKDIQBUcubfPDixfDxKQ&s",
       "category": "breakfast"
     }
   ]

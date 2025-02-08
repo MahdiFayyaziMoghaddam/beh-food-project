@@ -4,6 +4,6 @@ export interface IFoodItem {
   order: string;
   price: number;
   offerPrice: number;
-  category: string;
+  category: 'lunch' | 'breakfast';
   image: string;
 }

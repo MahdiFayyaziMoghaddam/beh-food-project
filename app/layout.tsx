@@ -1,13 +1,11 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { OrderListProvider } from "@/contexts/OrderListContext";
+import { HomeStatesProvider } from "@/contexts/HomeStatesContext";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: 'BEH FOOD',
-  description: 'From BEH FOOD'
-}
 
 export default function RootLayout({
   children,
@@ -17,9 +15,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-      <link rel="shortcut icon" href="images/icon.svg" type="image/x-icon" />
+        <link rel="shortcut icon" href="images/icon.svg" type="image/x-icon" />
+        <title>BEH FOOD</title>
       </head>
-      <body className={`${inter.className} min-h-screen`}>{children}</body>
+      <body className={`${inter.className} min-h-screen relative`}>
+        <OrderListProvider>
+          <HomeStatesProvider>{children}</HomeStatesProvider>
+        </OrderListProvider>
+      </body>
     </html>
   );
 }
