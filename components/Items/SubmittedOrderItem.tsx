@@ -11,22 +11,24 @@ export default function SubmittedOrderItem({ order }: ISubmittedOrderItem) {
   return (
     <div
       key={order.id}
-      className="flex flex-row-reverse justify-between items-end w-full h-[72px] border-[#00000040] border-y-[0.2px] bg-white"
+      className="flex flex-row-reverse justify-between items-end w-full border-[#00000040] border-y-[0.2px] bg-white"
     >
-      <div className="flex flex-col flex-nowrap justify-between items-end w-[281px] h-[56px] my-2 mr-[10px]">
-        <p className="w-[281px] h-6 text-[16px] text-right font-vazir-600">
+      <div className="flex flex-col flex-nowrap justify-between items-end w-full p-2 gap-2 max-xl:p-[6px] max-xl:gap-[6px]">
+        <p className="w-full text-[16px] text-right font-vazir-600 max-xl:text-[14px]">
           {order.name}
         </p>
-        <div className="flex flex-row-reverse justify-start min-w-[80px] h-[22px]">
-          <span className="text-[14px] font-vazir-500 text-center leading-[26px]">
+        <div className="flex flex-row-reverse justify-start items-baseline w-full">
+          <span className="text-[14px] font-vazir-500 text-center max-xl:text-[12px]">
             {spreadNumber(order.offerPrice || order.price)}
           </span>
-          <span className="text-[14px] font-vazir-400 select-none text-center mr-[2px] leading-[26px]">
+          <span className="text-[14px] font-vazir-400 select-none text-center mr-[3px] max-xl:text-[12px]">
             تومان
           </span>
         </div>
       </div>
-      <p className="mb-[7px] ml-4">{order.quantity}</p>
+      <p className="mb-[6px] ml-4 font-vazir-500 text-[16px] max-xl:text-[12px]">
+        {order.quantity}
+      </p>
     </div>
   );
 }

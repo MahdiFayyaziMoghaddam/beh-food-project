@@ -24,6 +24,8 @@ export const loginReducer = (
       return { ...state, code: action.payload };
     case "SET_IS_VALID_CODE":
       return { ...state, isValidCode: action.payload };
+    case "SET_IS_VALID_PHONE":
+      return { ...state, isPhoneValid: action.payload };
     case "SET_GENERATED_CODE":
       return { ...state, generatedCode: action.payload };
     case "SET_SHOW_TIMER":

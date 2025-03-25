@@ -1,17 +1,13 @@
+"use client";
 import React, { useState } from "react";
 import { Box, Modal } from "@mui/material";
 
-
 export default function ConfirmModal() {
-
   const [open, setOpen] = useState(true);
 
   return (
     <>
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-      >
+      <Modal open={open} onClose={() => setOpen(false)}>
         <Box
           sx={{
             position: "relative",

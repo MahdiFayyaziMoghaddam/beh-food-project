@@ -1,5 +1,6 @@
-import { TOrderItem } from '@/types/orderItem';
-import React, { createContext, useState, useContext } from 'react'
+"use client";
+import { TOrderItem } from "@/types/orderItem";
+import React, { createContext, useState, useContext } from "react";
 
 interface IOrderContextState {
   orderList: TOrderItem[];
@@ -8,7 +9,7 @@ interface IOrderContextState {
 
 const defaultContextValue: IOrderContextState = {
   orderList: [],
-  setOrderList: () => null
+  setOrderList: () => null,
 };
 
 const OrderContext = createContext<IOrderContextState>(defaultContextValue);
@@ -21,7 +22,7 @@ export const OrderListProvider = ({ children }: IOrderListProvider) => {
   const [orderList, setOrderList] = useState<TOrderItem[]>([]);
 
   return (
-    <OrderContext.Provider value={{orderList, setOrderList}}>
+    <OrderContext.Provider value={{ orderList, setOrderList }}>
       {children}
     </OrderContext.Provider>
   );
@@ -30,7 +31,7 @@ export const OrderListProvider = ({ children }: IOrderListProvider) => {
 export const useOrderListContext = () => {
   const context = useContext(OrderContext);
   if (!context) {
-    throw new Error('useOrder must be used within an OrderListProvider');
+    throw new Error("useOrder must be used within an OrderListProvider");
   }
   return context;
 };

@@ -2,7 +2,8 @@
 
 import { useOrderListContext } from "@/contexts/OrderListContext";
 import { useEffect, useState } from "react";
-import { FiMinus } from "react-icons/fi";
+import { FaMinus, FaPlus } from "react-icons/fa";
+import { FiMinus, FiPlus } from "react-icons/fi";
 import { GoPlus } from "react-icons/go";
 
 interface IChangeBtn {
@@ -41,22 +42,22 @@ export default function ChangeBtn({
 
   return (
     <div
-      className={`relative flex flex-nowrap justify-between items-center w-[80px] h-6 border-primary border-[0.2px] rounded-[5px] ${className}`}
+      className={`flex flex-nowrap justify-center gap-2 items-center h-6 border-primary border-[0.2px] rounded-[5px] select-none ${className}`}
     >
       <button
         onClick={() => setQuantity((prev) => prev + 1)}
-        className="flex justify-center items-center size-6  text-primary"
+        className="flex justify-center items-center p-1 text-primary cursor-pointer"
       >
-        <GoPlus />
+        <FiPlus />
       </button>
 
-      <p className="h-full w-auto px-[2px] text-primary text-[16px] font-vazir-400 text-center leading-[28px] select">
+      <p className="h-full w-auto px-[2px] text-primary text-[16px] font-vazir-400 text-center leading-[25px]">
         {quantity}
       </p>
 
       <button
         onClick={() => setQuantity((prev) => prev - 1)}
-        className="flex justify-center items-center size-6 text-primary"
+        className="flex justify-center items-center p-1 text-primary cursor-pointer"
       >
         <FiMinus />
       </button>

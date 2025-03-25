@@ -1,7 +1,15 @@
-import { homeReducer, initialHomeStates } from '@/stores/homeStore';
-import { createContext, useReducer, useContext, ReactNode, Dispatch, Context } from 'react';
+"use client";
+import { homeReducer, initialHomeStates } from "@/stores/homeStore";
+import {
+  createContext,
+  useReducer,
+  useContext,
+  ReactNode,
+  Dispatch,
+  Context,
+} from "react";
 
-type THomeContext = { state: THomeStates; dispatch: Dispatch<THomeActions> }
+type THomeContext = { state: THomeStates; dispatch: Dispatch<THomeActions> };
 
 const HomeStatesContext = createContext<THomeContext | null>(null);
 

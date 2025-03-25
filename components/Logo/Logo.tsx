@@ -3,9 +3,9 @@ import Image from "../Image/Image";
 
 export default function Logo() {
   return (
-    <div className="flex justify-center items-center w-[157px] h-[36px] select-none">
+    <div className="flex justify-center items-center w-[157px] h-[36px] select-none max-xl:scale-80">
       <span className="h-full mr-[2px] text-[24px] font-vazir-400">BEH</span>
-      <Image className="size-[36px]" src="./images/icon.svg" alt="logo" />
+      <Image className="size-[36px]" src="./images/favicon.svg" alt="logo" />
       <span className=" h-full text-primary ml-[2px] text-[24px] font-vazir-700">
         FOOD
       </span>
