@@ -9,6 +9,12 @@ export const metadata: Metadata = {
     "Test project for food shopping, created with Next.js, TypeScript, and Tailwind CSS",
   icons: "./images/favicon.svg",
   keywords: [
+    "beh",
+    "food",
+    "mahdi",
+    "fayyazi",
+    "moghaddam",
+    "beh-food",
     "BEH FOOD",
     "food",
     "shopping",
@@ -17,8 +23,6 @@ export const metadata: Metadata = {
     "MFM",
     "Mahdi FayyaziMoghaddam",
     "Next.js",
-    "TypeScript",
-    "Tailwind CSS",
   ],
   openGraph: {
     title: "BEH FOOD",
