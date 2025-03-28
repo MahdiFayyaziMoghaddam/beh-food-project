@@ -20,6 +20,18 @@ export const metadata: Metadata = {
     "fayyazi",
     "fayazi",
   ],
+  openGraph: {
+    title: "BEH FOOD",
+    description: "the test project for food shopping and created by MFM :)",
+    images: [
+      {
+        url: "./images/favicon.svg",
+        width: 117,
+        height: 117,
+        alt: "BEH-FOOD",
+      },
+    ],
+  },
 };
 export default function RootLayout({
   children,
