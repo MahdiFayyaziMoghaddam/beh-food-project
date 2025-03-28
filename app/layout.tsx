@@ -4,33 +4,43 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "BEH FOOD",
-  authors: { name: "Mahdi FayyaziMoghaddam" },
-  description: "Created with Nextjs + TypeScript + Tailwindcss",
-  icons: "images/favicon.svg",
+  authors: [{ name: "Mahdi FayyaziMoghaddam" }],
+  description:
+    "Test project for food shopping, created with Next.js, TypeScript, and Tailwind CSS",
+  icons: "./images/favicon.svg",
   keywords: [
-    "beh",
+    "BEH FOOD",
     "food",
-    "mahdi",
-    "BEH",
-    "FOOD",
-    "PROJECT",
+    "shopping",
     "project",
-    "FayyaziMoghaddam",
-    "Mahdi",
-    "fayyazi",
-    "fayazi",
+    "food project",
+    "MFM",
+    "Mahdi FayyaziMoghaddam",
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
   ],
   openGraph: {
     title: "BEH FOOD",
-    description: "the test project for food shopping and created by MFM :)",
+    description: "The test project for food shopping, created by MFM :)",
+    url: "https://beh-food.liara.run",
     images: [
       {
-        url: "./images/favicon.svg",
+        url: "/images/favicon.svg",
         width: 117,
         height: 117,
-        alt: "BEH-FOOD",
+        alt: "BEH FOOD Logo",
       },
     ],
+    type: "website",
+    siteName: "BEH FOOD",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@yourtwitterhandle", // برای تنظیم حساب توییتر خود
+    title: "BEH FOOD",
+    description: "Food shopping test project, created by MFM :)",
+    images: "/images/favicon.svg",
   },
 };
 export default function RootLayout({
